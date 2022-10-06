@@ -1,57 +1,29 @@
 package Assignment1;
-import java.io.*;
+import java.io. * ;
+import java.util.Scanner;
+public class FileReader {
 
-public class FileReader extends Reader {
-
-    //Constructor
-    public FileReader(String s) {
-        String File = s;
+    public FileReader(){
     }
-    //Read file and return price
-    public int Read(String Fruit ){
-    int [] price = new int[10];
-    int i = 0;
-    int k = 0;
-    //csv reader
-    try {
-        BufferedReader br = new BufferedReader(new FileReader("src/Assignment1/Prices.csv"));
-        String line = "";
-        while ((line = br.readLine()) != null) {
-            String[] values = line.split(",");
-            if (values[0].equals(Fruit)) {
-                price[i] = Integer.parseInt(values[1]);
-                i++;
-            }
+
+    public double readFile(String fruit) throws Exception {
+        int i = 0;
+        double[] prices = new double[2];
+        File file = new File("/Users/new/Desktop/Assignment1-0-2/src/Assignment1/prices.txt");
+        Scanner sc = new Scanner(file);
+        double j = 0;
+        while (sc.hasNextLine()&& i < 2) {
+            prices[i] = Double.parseDouble(sc.nextLine());
+            i++;
         }
-        br.close();
-    } catch (FileNotFoundException e) {
-        e.printStackTrace();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+        if (fruit.equalsIgnoreCase("Banana")) {
+            j = prices[0];
+        } else if (fruit.equalsIgnoreCase("Apple")) {
+            j = prices[1];
+        }
 
-
-
-
-    if (Fruit.equalsIgnoreCase("Apple") ){
-         k = price[0];
-
-    }
-    if (Fruit.equalsIgnoreCase("Banana") ){
-     k = price[1];
-    }
-
-    return k;
-}
-
-    @Override
-    public int read(char[] cbuf, int off, int len) throws IOException {
-        return 0;
-    }
-
-    @Override
-    public void close() throws IOException {
-
+        //closes the scanner
+        return j;
     }
 }
 
